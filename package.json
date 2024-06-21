@@ -5,6 +5,9 @@
   "repository": "https://github.com/SolDier2018/crypto-pro.git",
   "author": "Eugeniy Manuylov <astels2009@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "vite build"
+  },
   "dependencies": {
     "typescript": "^5.5.2",
     "vite": "^5.3.1"
