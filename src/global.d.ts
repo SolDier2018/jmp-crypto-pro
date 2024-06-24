@@ -1,8 +1,7 @@
 declare global {
-    interface Window {
-      cadesplugin: any;
-    }
+  interface Window {
+    cadesplugin: any;
   }
-  
-  export {};
-  
+}
+
+export { };
