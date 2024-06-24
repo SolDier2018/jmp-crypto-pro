@@ -2,12 +2,6 @@ import { TSignOptions } from 'types';
 
 import { loadCadesPlugin } from './load-cades-plugin';
 
-declare global {
-    interface Window {
-        cadesplugin: any;
-    }
-}
-
 async function signDocumentHash(options: TSignOptions): Promise<string> {
     await loadCadesPlugin();
 
