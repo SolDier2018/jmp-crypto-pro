@@ -1,4 +1,4 @@
-import { TSignOptions } from 'types';
+import type { TSignOptions } from 'types';
 
 import { loadCadesPlugin } from './load-cades-plugin';
 
