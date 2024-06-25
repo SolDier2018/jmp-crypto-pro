@@ -1,6 +1,6 @@
 // синтетические переменные, которые подменяются в рантайме
 export const cadesAsyncToken = {};
-export const createCadesPluginObject = (): any => ({});
+export const createCadesPluginObject = (...args: any): any => ({});
 
 function getGeneratorConstructor(): GeneratorFunction {
     return new Function('', 'return Object.getPrototypeOf(function*(){}).constructor')();
