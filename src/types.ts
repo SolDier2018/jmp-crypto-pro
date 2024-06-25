@@ -1,12 +1,15 @@
-export type TSignOptions = {
-    certificateThumbprint: string;
-    hash: string;
-}
+export type TTagsTranslations = {
+    possibleNames: string[];
+    translation: string;
+};
 
-export type TCertificate = {
-    thumbprint: string;
-    subjectName: string;
-    issuerName: string;
-    validFrom: Date;
-    validTo: Date;
-}
+export type TTagTranslation = {
+    description: string;
+    title: string;
+    isTranslated: boolean;
+};
+
+export type TAlgorithmInfo = {
+    algorithm: string;
+    oid: string;
+};
