@@ -1,6 +1,6 @@
 {
     "name": "jmp-crypto-pro",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "main": "index.js",
     "repository": "https://github.com/SolDier2018/crypto-pro.git",
     "author": "Eugeniy Manuylov <astels2009@gmail.com>",
