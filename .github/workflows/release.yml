@@ -16,7 +16,7 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v2
               with:
-                  node-version: '20'
+                  node-version: '14'
 
             - name: Install dependencies
               run: npm install
@@ -24,22 +24,26 @@ jobs:
             - name: Build project
               run: npm run build
 
-            - name: Bump version and create release
-              id: release
+            - name: Bump version
+              id: bump_version
+              run: |
+                  npm version patch -m "Bump version to %s"
+
+            - name: Create GitHub Release
+              id: create_release
               uses: actions/create-release@v1
               with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  tag_name: ${{ github.ref }}
-                  release_name: Release ${{ github.ref }}
+                  token: ${{ secrets.GITHUB_TOKEN }} # Использование GITHUB_TOKEN для создания релиза
+                  tag_name: ${{ steps.bump_version.outputs.new_version }} # Использование новой версии как тега
+                  release_name: Release ${{ steps.bump_version.outputs.new_version }}
                   body: |
                       ## Changes
                       - Describe your changes here
 
-            - name: Debug information
-              run: |
-                  node -v
-                  npm -v
-                  echo "Publishing to npm with token: ${{ secrets.NPM_TOKEN }}"
+            - name: Check npm token
+              run: echo $NODE_AUTH_TOKEN
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Publish to npm
               run: npm publish
