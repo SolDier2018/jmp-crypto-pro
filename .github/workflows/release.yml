@@ -21,6 +21,15 @@ jobs:
             - name: Install dependencies
               run: npm install
 
+            - name: Check git status
+              run: git status
+
+            - name: Commit changes
+              run: |
+                  git add .
+                  git commit -m "Commit changes before bumping version"
+              if: success() # Выполнять только в случае успешного выполнения предыдущих шагов
+
             - name: Bump version
               id: bump_version
               run: |
