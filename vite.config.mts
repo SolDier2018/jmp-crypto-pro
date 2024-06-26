@@ -20,9 +20,6 @@ export default defineConfig({
             compress: {
                 drop_console: false,
             },
-            format: {
-                comments: false, // Опционально: удаляет комментарии
-            },
         },
     },
 });
