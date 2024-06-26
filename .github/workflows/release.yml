@@ -34,6 +34,12 @@ jobs:
                   tag_name: ${{ github.ref }}
                   release_name: Release ${{ github.ref }}
 
+            - name: Debug information
+              run: |
+                  node -v
+                  npm -v
+                  echo "Publishing to npm with token: ${{ secrets.NPM_TOKEN }}"
+
             - name: Publish to npm
               run: npm publish
               env:
