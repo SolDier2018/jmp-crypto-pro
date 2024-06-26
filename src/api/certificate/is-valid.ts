@@ -1,23 +1,19 @@
 import { Certificate } from './certificate';
-import { afterPluginsLoaded, cadesAsyncToken, generateCadesFn } from '../../utils';
+import { afterPluginsLoaded } from '../../utils';
 
-export const isValid = afterPluginsLoaded(function (this: Certificate): boolean {
-    const cadesCertificate = this._cadesCertificate;
+export const isValid = afterPluginsLoaded(async function (this: Certificate): Promise<boolean> {
+    const cadesCertificate = this.cadesCertificate;
 
-    return eval(
-        generateCadesFn(function isValid() {
-            let isValid;
+    let isValid;
 
-            try {
-                isValid = cadesAsyncToken + cadesCertificate.IsValid();
-                isValid = cadesAsyncToken + isValid.Result;
-            } catch (error) {
-                console.error(error);
+    try {
+        isValid = cadesCertificate.IsValid();
+        isValid = isValid.Result;
+    } catch (error) {
+        console.error(error);
 
-                throw new Error('Ошибка при проверке сертификата');
-            }
+        throw new Error('Ошибка при проверке сертификата');
+    }
 
-            return Boolean(isValid);
-        })
-    );
+    return Boolean(isValid);
 });

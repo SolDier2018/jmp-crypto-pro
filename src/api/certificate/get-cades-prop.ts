@@ -1,20 +1,19 @@
 import { Certificate } from './certificate';
-import { afterPluginsLoaded, cadesAsyncToken, generateCadesFn } from '../../utils';
+import { afterPluginsLoaded } from '../../utils';
 
-export const getCadesProp = afterPluginsLoaded(function (this: Certificate, propName: string) {
-    const cadesCertificate = this._cadesCertificate;
+export const getCadesProp = afterPluginsLoaded(async function (
+    this: Certificate,
+    propName: string
+) {
+    const cadesCertificate = this.cadesCertificate;
 
-    return eval(
-        generateCadesFn(function getCadesProp() {
-            let propertyValue;
+    let propertyValue;
 
-            try {
-                propertyValue = cadesAsyncToken + cadesCertificate[propName];
-            } catch (error) {
-                throw new Error('Ошибка при обращении к свойству сертификата');
-            }
+    try {
+        propertyValue = cadesCertificate[propName];
+    } catch (error) {
+        throw new Error('Ошибка при обращении к свойству сертификата');
+    }
 
-            return propertyValue;
-        })
-    );
+    return propertyValue;
 });

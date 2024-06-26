@@ -1,44 +1,28 @@
-import {
-    afterPluginsLoaded,
-    generateCadesFn,
-    cadesAsyncToken,
-    createCadesPluginObject,
-} from '../utils';
+import { afterPluginsLoaded } from '../utils';
 
-export type TSystemInfo = {
-    cadesVersion: string;
-    cspVersion: string;
-};
+import type { TSystemInfo } from '../types';
 
-export const getSystemInfo = afterPluginsLoaded((): TSystemInfo => {
+export const getSystemInfo = afterPluginsLoaded(async (): Promise<TSystemInfo> => {
+    const { cadesplugin } = window;
+
     const sysInfo = {
         cadesVersion: '',
         cspVersion: '',
     };
 
-    return eval(
-        generateCadesFn(function getSystemInfo(): TSystemInfo {
-            let cadesAbout;
+    try {
+        let cadesAbout = await cadesplugin.CreateObjectAsync('CAdESCOM.About');
 
-            try {
-                cadesAbout = cadesAsyncToken + createCadesPluginObject('CAdESCOM.About');
+        sysInfo.cadesVersion = await cadesAbout.PluginVersion;
+        sysInfo.cspVersion = await cadesAbout.CSPVersion();
 
-                sysInfo.cadesVersion = cadesAsyncToken + cadesAbout.PluginVersion;
-                sysInfo.cspVersion = cadesAsyncToken + cadesAbout.CSPVersion();
+        sysInfo.cadesVersion = await sysInfo.cadesVersion.toString();
+        sysInfo.cspVersion = await sysInfo.cspVersion.toString();
+    } catch (error) {
+        console.error(error);
 
-                if (!sysInfo.cadesVersion) {
-                    sysInfo.cadesVersion = cadesAsyncToken + cadesAbout.Version;
-                }
+        throw new Error('Ошибка при получении информации о системе');
+    }
 
-                sysInfo.cadesVersion = cadesAsyncToken + sysInfo.cadesVersion.toString();
-                sysInfo.cspVersion = cadesAsyncToken + sysInfo?.cspVersion.toString();
-            } catch (error) {
-                console.error(error);
-
-                throw new Error('Ошибка при получении информации о системе');
-            }
-
-            return sysInfo;
-        })
-    );
+    return sysInfo;
 });

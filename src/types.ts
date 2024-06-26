@@ -13,3 +13,8 @@ export type TAlgorithmInfo = {
     algorithm: string;
     oid: string;
 };
+
+export type TSystemInfo = {
+    cadesVersion: string;
+    cspVersion: string;
+};

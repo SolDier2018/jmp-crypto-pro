@@ -1,21 +1,29 @@
 {
-  "name": "crypto-pro",
-  "version": "1.0.1",
-  "main": "index.js",
-  "repository": "https://github.com/SolDier2018/crypto-pro.git",
-  "author": "Eugeniy Manuylov <astels2009@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "build": "vite build"
-  },
-  "dependencies": {
-    "prettier": "^3.3.2",
-    "typescript": "^5.5.2",
-    "vite": "^5.3.1"
-  },
-  "devDependencies": {
-    "@types/node": "^20.14.7",
-    "@vitejs/plugin-vue": "^5.0.5",
-    "@vitejs/plugin-vue-jsx": "^4.0.0"
-  }
+    "name": "crypto-pro",
+    "version": "1.0.2",
+    "main": "index.js",
+    "repository": "https://github.com/SolDier2018/crypto-pro.git",
+    "author": "Eugeniy Manuylov <astels2009@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "vite",
+        "build": "vite build"
+    },
+    "dependencies": {
+        "@vitejs/plugin-react": "^4.3.1",
+        "prettier": "^3.3.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-script": "^2.0.5",
+        "typescript": "^5.5.2",
+        "vite": "^5.3.1",
+        "vite-plugin-commonjs": "^0.10.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.14.7",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-vue": "^5.0.5",
+        "@vitejs/plugin-vue-jsx": "^4.0.0"
+    }
 }

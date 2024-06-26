@@ -1,7 +1,7 @@
 import { Certificate } from './certificate';
 import { getCadesProp } from './get-cades-prop';
-import type { TTagsTranslations, TTagTranslation } from '../../types';
 import { afterPluginsLoaded, parseCertInfo } from '../../utils';
+import type { TTagsTranslations, TTagTranslation } from '../../types';
 
 export const getInfo = afterPluginsLoaded(async function (
     this: Certificate,
@@ -9,6 +9,8 @@ export const getInfo = afterPluginsLoaded(async function (
     entitiesPath: string
 ): Promise<TTagTranslation[]> {
     let entities: string;
+
+    console.log('--this');
 
     try {
         entities = await getCadesProp.call(this, entitiesPath);

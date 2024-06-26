@@ -1,5 +1,6 @@
 import { afterPluginsLoaded, isSupportedCadesVersion, isSupportedCSPVersion } from '../utils';
-import { getSystemInfo, TSystemInfo } from './get-system-info';
+import { getSystemInfo } from './get-system-info';
+import type { TSystemInfo } from '../types';
 
 export const isValidSystemSetup = afterPluginsLoaded(async (): Promise<boolean> => {
     let systemInfo: TSystemInfo;
