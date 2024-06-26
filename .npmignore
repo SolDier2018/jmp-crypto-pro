@@ -1,0 +1,7 @@
+# develop
+.idea
+.vscode
+.git
+
+# dependencies
+node_modules

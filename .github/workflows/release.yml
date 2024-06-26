@@ -1,0 +1,40 @@
+name: Release and Publish to npm
+
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '20'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run tests
+              run: npm test
+
+            - name: Build project
+              run: npm run build
+
+            - name: Bump version and create release
+              id: release
+              uses: actions/create-release@v1
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: Release ${{ github.ref }}
+
+            - name: Publish to npm
+              run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
