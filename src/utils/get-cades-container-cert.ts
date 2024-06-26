@@ -49,6 +49,14 @@ export const getCadesContainerCert = afterPluginsLoaded(
                 thumbprint
             );
 
+            const count = await cadesCertificateList.Count;
+
+            if (!count) {
+                throw new Error(
+                    `Сертификат с отпечатком: "${thumbprint}" не найден в хранилище закрытого ключа`
+                );
+            }
+
             cadesCertificate = await cadesCertificateList.Item(1);
         } catch (error) {
             throw new Error('Ошибка при получении сертификата из хранилища закрытого ключа');

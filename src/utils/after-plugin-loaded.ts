@@ -1,3 +1,5 @@
+import { Certificate } from '../api';
+
 type UnPromisify<T> = T extends Promise<infer R> ? R : T;
 
 let isSetLogLevel = false;
@@ -8,7 +10,10 @@ export const afterPluginsLoaded = <T extends (...args: any[]) => any>(
 ): ((...args: Parameters<T>) => Promise<UnPromisify<ReturnType<T>>>) => {
     const canPromise = Boolean(window.Promise);
 
-    return async function (...args: Parameters<T>): Promise<UnPromisify<ReturnType<T>>> {
+    return async function (
+        this: Certificate,
+        ...args: Parameters<T>
+    ): Promise<UnPromisify<ReturnType<T>>> {
         if (!isPluginLoaded) {
             try {
                 require('../vendor/cadesplugin_api');

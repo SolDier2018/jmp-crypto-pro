@@ -1,7 +1,7 @@
 import { Certificate } from './certificate';
 import { afterPluginsLoaded } from '../../utils';
 
-export const isValid = afterPluginsLoaded(async function (): Promise<boolean> {
+export const isValid = afterPluginsLoaded(async function (this: Certificate): Promise<boolean> {
     const cadesCertificate = (this as Certificate).cadesCertificate;
 
     let isValid;

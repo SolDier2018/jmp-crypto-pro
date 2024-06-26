@@ -2,8 +2,10 @@ import { afterPluginsLoaded } from '../../utils';
 import { Certificate } from './certificate';
 import type { TAlgorithmInfo } from '../../types';
 
-export const getAlgorithm = afterPluginsLoaded(async function (): Promise<TAlgorithmInfo> {
-    const cadesCertificate = (this as Certificate).cadesCertificate;
+export const getAlgorithm = afterPluginsLoaded(async function (
+    this: Certificate
+): Promise<TAlgorithmInfo> {
+    const cadesCertificate = this.cadesCertificate;
 
     const algorithmInfo: TAlgorithmInfo = {
         algorithm: '',
