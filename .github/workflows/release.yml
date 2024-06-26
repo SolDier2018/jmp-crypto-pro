@@ -3,7 +3,7 @@ name: Release and Publish to npm
 on:
     push:
         tags:
-            - 'v*.*.*'
+            - 'v*.*.*' # Запуск при пуше тегов, соответствующих шаблону
 
 jobs:
     release:
@@ -12,6 +12,8 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0 # Ensure the entire history is fetched so that we can push tags
 
             - name: Set up Node.js
               uses: actions/setup-node@v2
@@ -24,17 +26,32 @@ jobs:
             - name: Build project
               run: npm run build
 
+            - name: Configure Git
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+
             - name: Bump version
               id: bump_version
               run: |
-                  npm version patch -m "Bump version to %s"
+                  CURRENT_VERSION=$(node -p "require('./package.json').version")
+                  NEW_VERSION=$(npm version patch -m "Bump version to %s")
+                  echo "::set-output name=new_version::$NEW_VERSION"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Push changes
+              run: |
+                  git push origin HEAD --tags
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Create GitHub Release
               id: create_release
               uses: actions/create-release@v1
               with:
-                  token: ${{ secrets.GITHUB_TOKEN }} # Использование GITHUB_TOKEN для создания релиза
-                  tag_name: ${{ steps.bump_version.outputs.new_version }} # Использование новой версии как тега
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  tag_name: ${{ steps.bump_version.outputs.new_version }}
                   release_name: Release ${{ steps.bump_version.outputs.new_version }}
                   body: |
                       ## Changes
