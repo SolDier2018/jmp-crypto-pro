@@ -31,6 +31,18 @@ jobs:
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
 
+            - name: Check for existing tag
+              id: check_tag
+              run: |
+                  TAG_EXISTS=$(git tag -l "v$(node -p "require('./package.json').version")")
+                  echo "::set-output name=tag_exists::$TAG_EXISTS"
+
+            - name: Delete existing tag
+              if: ${{ steps.check_tag.outputs.tag_exists }}
+              run: |
+                  git tag -d "v$(node -p "require('./package.json').version")"
+                  git push origin :refs/tags/v$(node -p "require('./package.json').version")
+
             - name: Bump version
               id: bump_version
               run: |
