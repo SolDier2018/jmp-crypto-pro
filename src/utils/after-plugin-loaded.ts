@@ -6,13 +6,13 @@ let isPluginLoaded = false;
 export const afterPluginsLoaded = <T extends (...args: any[]) => any>(
     fn: T
 ): ((...args: Parameters<T>) => Promise<UnPromisify<ReturnType<T>>>) => {
-    return async (...args: Parameters<T>): Promise<UnPromisify<ReturnType<T>>> => {
+    const canPromise = Boolean(window.Promise);
+
+    return async function (...args: Parameters<T>): Promise<UnPromisify<ReturnType<T>>> {
         if (!isPluginLoaded) {
             try {
-                await require('../vendor/cadesplugin_api');
+                require('../vendor/cadesplugin_api');
             } catch (error) {
-                console.error(error);
-
                 throw new Error('Ошибка при подключении модуля для работы с Cades plugin');
             }
 
@@ -20,6 +20,10 @@ export const afterPluginsLoaded = <T extends (...args: any[]) => any>(
         }
 
         const { cadesplugin } = window;
+
+        if (!canPromise) {
+            throw new Error('Необходим полифилл для Promise');
+        }
 
         if (!cadesplugin) {
             throw new Error('Не подключен модуль для работы с Cades plugin');

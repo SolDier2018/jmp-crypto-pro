@@ -1,10 +1,6 @@
-import { Certificate } from './certificate';
 import { afterPluginsLoaded } from '../../utils';
 
-export const getCadesProp = afterPluginsLoaded(async function (
-    this: Certificate,
-    propName: string
-) {
+export const getCadesProp = afterPluginsLoaded(async function (propName: string) {
     const cadesCertificate = this.cadesCertificate;
 
     let propertyValue;

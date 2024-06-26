@@ -19,8 +19,6 @@ export const getSystemInfo = afterPluginsLoaded(async (): Promise<TSystemInfo> =
         sysInfo.cadesVersion = await sysInfo.cadesVersion.toString();
         sysInfo.cspVersion = await sysInfo.cspVersion.toString();
     } catch (error) {
-        console.error(error);
-
         throw new Error('Ошибка при получении информации о системе');
     }
 

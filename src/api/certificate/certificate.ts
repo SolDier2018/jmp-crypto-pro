@@ -25,7 +25,7 @@ export class Certificate {
         validFrom,
         validTo,
     }: {
-        cadesCertificate?: CadesCertificate;
+        cadesCertificate: CadesCertificate;
         name?: string;
         issuerName: string;
         subjectName: string;

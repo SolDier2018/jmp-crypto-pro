@@ -16,8 +16,6 @@ const App = () => {
         (async () => {
             try {
                 setCertificates(await getUserCertificates());
-                console.log(await getSystemInfo());
-                console.log(await isValidSystemSetup());
             } catch (error) {
                 console.error(error);
             }
@@ -31,7 +29,13 @@ const App = () => {
     }, [certificates.length]);
 
     const handleOnSign = async () => {
-        console.log('--certificates', certificates[0].thumbprint);
+        console.log(await getSystemInfo());
+        console.log(await isValidSystemSetup());
+
+        console.log(await certificates[1].getIssuerInfo);
+        console.log(await certificates[1].getOwnerInfo);
+        console.log(await certificates[1].getAlgorithm);
+        console.log(await certificates[1].isValid);
 
         console.log(
             await createDetachedSignature(
@@ -39,8 +43,6 @@ const App = () => {
                 'c19a018fd8788d2bbe555dd8fc36e74601e0320d7c0ae5e657760f4dcb07cc35'
             )
         );
-
-        console.log(await certificates[1].getIssuerInfo);
     };
 
     return (

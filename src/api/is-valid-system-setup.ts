@@ -8,8 +8,6 @@ export const isValidSystemSetup = afterPluginsLoaded(async (): Promise<boolean> 
     try {
         systemInfo = await getSystemInfo();
     } catch (error) {
-        console.error(error);
-
         throw new Error('Настройки ЭП на данной машине не верны');
     }
 

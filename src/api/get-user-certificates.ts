@@ -48,7 +48,7 @@ export const getUserCertificates = afterPluginsLoaded(
 
             await store.Close();
         } catch (error) {
-            console.error('Ошибка при получении сертификатов', error);
+            throw new Error('Ошибка при получении сертификатов');
         }
         return certificates;
     }

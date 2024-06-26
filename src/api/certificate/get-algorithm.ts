@@ -2,10 +2,8 @@ import { afterPluginsLoaded } from '../../utils';
 import { Certificate } from './certificate';
 import type { TAlgorithmInfo } from '../../types';
 
-export const getAlgorithm = afterPluginsLoaded(async function (
-    this: Certificate
-): Promise<TAlgorithmInfo> {
-    const cadesCertificate = this.cadesCertificate;
+export const getAlgorithm = afterPluginsLoaded(async function (): Promise<TAlgorithmInfo> {
+    const cadesCertificate = (this as Certificate).cadesCertificate;
 
     const algorithmInfo: TAlgorithmInfo = {
         algorithm: '',
@@ -15,11 +13,11 @@ export const getAlgorithm = afterPluginsLoaded(async function (
     let cadesPublicKey;
 
     try {
-        cadesPublicKey = cadesCertificate.PublicKey();
-        cadesPublicKey = cadesPublicKey.Algorithm;
+        cadesPublicKey = await cadesCertificate.PublicKey();
+        cadesPublicKey = await cadesPublicKey.Algorithm;
 
-        algorithmInfo.algorithm = cadesPublicKey.FriendlyName;
-        algorithmInfo.oid = cadesPublicKey.Value;
+        algorithmInfo.algorithm = await cadesPublicKey.FriendlyName;
+        algorithmInfo.oid = await cadesPublicKey.Value;
     } catch (error) {
         throw new Error('Ошибка при получении алгоритма');
     }

@@ -1,17 +1,15 @@
 import { Certificate } from './certificate';
 import { afterPluginsLoaded } from '../../utils';
 
-export const isValid = afterPluginsLoaded(async function (this: Certificate): Promise<boolean> {
-    const cadesCertificate = this.cadesCertificate;
+export const isValid = afterPluginsLoaded(async function (): Promise<boolean> {
+    const cadesCertificate = (this as Certificate).cadesCertificate;
 
     let isValid;
 
     try {
-        isValid = cadesCertificate.IsValid();
-        isValid = isValid.Result;
+        isValid = await cadesCertificate.IsValid();
+        isValid = await isValid.Result;
     } catch (error) {
-        console.error(error);
-
         throw new Error('Ошибка при проверке сертификата');
     }
 
