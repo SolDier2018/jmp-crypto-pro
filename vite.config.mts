@@ -11,16 +11,23 @@ export default defineConfig({
     },
     build: {
         sourcemap: true,
-        commonjsOptions: { transformMixedEsModules: true },
         outDir: 'build',
         lib: {
-            entry: resolve(__dirname, 'src/index.ts'),
+            entry: './src/index.ts',
             name: 'CryptoProSignature',
-            fileName: (format) => `crypto-pro-signature.${format}.js`,
+            fileName: () => 'index.js',
         },
         terserOptions: {
             compress: {
                 drop_console: false,
+            },
+        },
+        rollupOptions: {
+            external: ['react'],
+            output: {
+                globals: {
+                    react: 'React',
+                },
             },
         },
     },
