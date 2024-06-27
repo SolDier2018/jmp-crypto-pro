@@ -61,8 +61,6 @@ import { getUserCertificates, Certificate } from 'jmp-crypto-pro';
 [Сертификат](src/api/certificate/certificate.ts) предоставляет следущее API:
 
 -   [isValid](src/api/certificate/is-valid.ts) - возвращает флаг действительности сертификата
--   [getCadesProp](src/api/certificate/get-cades-prop.ts) - возвращает указанное внутренее свойство
-    у сертификата в формате Cades
 -   [getAlgorithm](src/api/certificate/get-algorithm.ts) - возвращает информацию об алгоритме
     сертификата
 -   [getOwnerInfo](src/api/certificate/get-info.ts) - возвращает расшифрованную информацию о
