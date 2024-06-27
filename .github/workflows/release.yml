@@ -26,17 +26,17 @@ jobs:
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-            - name: Check git status
-              run: git status
+            # - name: Check git status
+            #   run: git status
 
-            - name: Commit changes
-              run: |
-                  git config --global user.name "github-actions[bot]"
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
-                  git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-                  git add .
-                  git commit -m "Commit changes before bumping version"
-              if: success() # Выполнять только в случае успешного выполнения предыдущих шагов
+            # - name: Commit changes
+            #   run: |
+            #       git config --global user.name "github-actions[bot]"
+            #       git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            #       git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            #       git add .
+            #       git commit -m "Commit changes before bumping version"
+            #   if: success() # Выполнять только в случае успешного выполнения предыдущих шагов
 
             - name: Bump version
               id: bump_version
