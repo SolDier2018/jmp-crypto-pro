@@ -44,8 +44,11 @@ jobs:
             - name: Commit changes
               run: |
                   git add -A
-                  git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
-                  git push
+                  if [ -n "$(git status --porcelain)" ]; then
+                    git commit -m "Bump version to ${{ steps.bump_version.outputs.new_version }}"
+                  else
+                    echo "No changes to commit"
+                  fi
               if: success()
 
             - name: Push changes
