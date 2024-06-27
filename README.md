@@ -14,12 +14,6 @@ npm install crypto-pro-js
 yarn add crypto-pro-js
 ```
 
-Для Bower:
-
-```bash
-bower install webmasterskaya/crypto-pro-js
-```
-
 Подключение пакета как UMD модуля через тэг script:
 
 ```html
