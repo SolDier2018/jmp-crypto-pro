@@ -1,13 +1,15 @@
 {
     "name": "jmp-crypto-pro",
     "version": "1.0.20",
-    "main": "index.js",
+    "main": "build/crypro-pro-signature.umd.js",
+    "module": "build/crypro-pro-signature.es.js",
+    "types": "build/index.d.ts",
     "repository": "https://github.com/SolDier2018/crypto-pro.git",
     "author": "Eugeniy Manuylov <astels2009@gmail.com>",
     "license": "MIT",
     "scripts": {
         "start": "vite",
-        "build": "vite build"
+        "build": "tsc && vite build"
     },
     "dependencies": {
         "@vitejs/plugin-react": "^4.3.1",
@@ -24,6 +26,7 @@
         "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "@vitejs/plugin-vue": "^5.0.5",
-        "@vitejs/plugin-vue-jsx": "^4.0.0"
+        "@vitejs/plugin-vue-jsx": "^4.0.0",
+        "vite-plugin-dts": "^3.9.1"
     }
 }
