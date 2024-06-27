@@ -7,7 +7,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
     plugins: [react(), commonjs(), dts()],
     server: {
-        port: 3000,
+        port: 3001,
     },
     build: {
         sourcemap: true,
