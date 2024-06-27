@@ -4,12 +4,16 @@
     "main": "build/crypro-pro-signature.umd.js",
     "module": "build/crypro-pro-signature.es.js",
     "types": "build/index.d.ts",
+    "files": [
+        "build"
+    ],
     "repository": "https://github.com/SolDier2018/crypto-pro.git",
     "author": "Eugeniy Manuylov <astels2009@gmail.com>",
     "license": "MIT",
     "scripts": {
         "start": "vite",
-        "build": "tsc && vite build"
+        "build": "vite build && tsc",
+        "build:types": "tsc"
     },
     "dependencies": {
         "@vitejs/plugin-react": "^4.3.1",

@@ -1,7 +1,7 @@
-# develop
-.idea
-.vscode
-.git
-
-# dependencies
-node_modules
+src/
+node_modules/
+.git/
+.vscode/
+.gitignore
+tsconfig.json
+vite.config.ts
