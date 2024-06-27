@@ -21,11 +21,6 @@ jobs:
             - name: Install dependencies
               run: npm install
 
-            - name: Authenticate with npm
-              run: npm login --registry=https://registry.npmjs.org/
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
             - name: Check git status
               run: git status
 
@@ -59,11 +54,6 @@ jobs:
                   release_name: Release ${{ steps.bump_version.outputs.new_version }}
                   body: |
                       Describe your changes here
-
-            - name: Check npm token
-              run: echo $NODE_AUTH_TOKEN
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
             - name: Publish to npm
               run: npm publish
