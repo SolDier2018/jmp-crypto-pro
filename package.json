@@ -1,6 +1,6 @@
 {
     "name": "jmp-crypto-pro",
-    "version": "1.0.20",
+    "version": "1.0.21",
     "main": "build/crypro-pro-signature.umd.js",
     "module": "build/crypro-pro-signature.es.js",
     "types": "build/index.d.ts",
