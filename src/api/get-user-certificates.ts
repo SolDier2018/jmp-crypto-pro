@@ -34,8 +34,6 @@ export const getUserCertificates = afterPluginsLoaded(
                 const validFrom = await cert.ValidFromDate;
                 const validTo = await cert.ValidToDate;
 
-                console.log('--issuerName', issuerName);
-
                 certificates.push(
                     new Certificate({
                         cadesCertificate: cert,
