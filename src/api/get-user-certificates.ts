@@ -1,6 +1,6 @@
 import { Certificate } from './certificate';
 
-import { afterPluginsLoaded } from '../utils';
+import { afterPluginsLoaded, extractCommonName } from '../utils';
 
 let certificatesCache: Certificate[];
 
@@ -34,9 +34,12 @@ export const getUserCertificates = afterPluginsLoaded(
                 const validFrom = await cert.ValidFromDate;
                 const validTo = await cert.ValidToDate;
 
+                console.log('--issuerName', issuerName);
+
                 certificates.push(
                     new Certificate({
                         cadesCertificate: cert,
+                        name: extractCommonName(issuerName),
                         thumbprint,
                         subjectName,
                         issuerName,
